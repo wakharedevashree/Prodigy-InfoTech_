@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+      padding: 0;
+    }
+    body{
+      width:100%;
+      height:100vh;
+      background-image: url(https://images.pexels.com/photos/1590549/pexels-photo-1590549.jpeg?auto=compress&cs=tinysrgb&w=600https://images.pexels.com/photos/268966/pexels-photo-268966.jpeg?auto=compress&cs=tinysrgb&w=600);
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container{
+      padding: 2rem 4rem;
+      max-width: 600px;
+      text-align: center;
+      position: relative;
+      border-radius: 10px;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .time{
+      padding: 1rem 0;
+      font-size: 3rem;
+      color: white;
+    }
+
+    button{
+      height:3rem;
+      width:6rem;
+      background-color: white;
+      color: black;
+      border: none;
+      font-size: 1.5rem;
+      font-weight: 550;
+      margin:  8px ;
+      padding: 4px 5px;
+      border-radius: 10px;
+    }
+    h1{
+      font-size: 3.5rem;
+      color:white;
+    }
+    button:hover{
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <section class="container">
+    <h1>Stopwatch</h1>
+    <p class="time">
+      <span id="min">00</span>: <span id="seconds">00</span>: <span id="tens">00</span>
+    </p>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+  </section>
+
+  <script>
+    window.onload= function(){
+      let minutes=0;
+      let sec=0;
+      let tens=0;
+      let Interval;
+       let appendmin=document.querySelector('#min');
+       let appendsec=document.querySelector('#seconds');
+       let appendtens=document.querySelector('#tens');
+
+       let startbtn=document.querySelector('#start');
+       let stopbtn=document.querySelector('#stop');
+       let resetbtn=document.querySelector('#reset');
+
+       const startTimer=()=>{
+           tens++;
+           if(tens<= 9){
+            appendtens.innerHTML='0'+tens
+           }
+           if(tens>9){
+            appendtens.innerHTML=tens
+           }
+           if(tens>99){
+            sec++
+            appendsec.innerHTML='0'+sec
+            tens=0
+            appendtens.innerHTML='0'+0;
+           }
+           if(sec>9){
+            appendsec.innerHTML=sec
+           }
+
+           if(sec>59){
+            minutes++
+            appendmin.innerHTMT='0'+minutes
+            sec=0
+            appendsec.innerHTML='0'+0;
+           }
+       };
+       startbtn.onclick=()=>{
+        clearInterval(Interval)
+        Interval=setInterval(startTimer,10)
+       };
+       stopbtn.onclick=()=>{
+          clearInterval(Interval)
+
+       }
+       resetbtn.onclick=()=>{
+        clearInterval(Interval)
+        tens='00'
+        sec='00'
+        minutes='00'
+        appendtens.innerHTML=tens
+        appendsec.innerHTML=sec
+        appendmin.innerHTML=minutes
+       }
+    };
+
+  </script>
+</body>
+</html>
